@@ -32,6 +32,7 @@ cd fire-calculator-next
 
 ### 2. 安装依赖
 
+```bash
 npm install
 ```
 
