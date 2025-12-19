@@ -33,8 +33,6 @@ cd fire-calculator-next
 ### 2. 安装依赖
 
 npm install
-# 确保安装了 UI 库
-npm install -D daisyui@latest
 ```
 
 ### 3. 启动本地开发服务器
