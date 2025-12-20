@@ -33,18 +33,18 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
         </p>
       </div>
 
-      <div className="w-full">
+      <div className="w-full ">
         {/* --- 核心结果卡片 --- */}
         {/* 🎨 优化：shadow-xl 与图表保持一致，bg-white 确保背景纯白 */}
-        <div className="bg-white p-6 md:p-8 rounded-xl mt-6 w-full shadow-xl border border-gray-100">
-          <p className="text-2xl font-bold text-center mb-6 text-gray-800">
+        <div className=" p-6 md:p-8 rounded-xl mt-6 w-full shadow-xl border border-gray-100">
+          <p className="text-2xl font-bold text-center mb-6  text-base-content">
             Result
           </p>
 
           <div className="flex flex-col md:flex-row justify-between text-center gap-8 md:gap-0">
             <div>
               <p className="text-gray-400 mb-1">Fire Age</p>
-              <p className="text-4xl md:text-5xl font-bold text-gray-800">
+              <p className="text-4xl md:text-5xl font-bold  text-base-content">
                 {result.fireAge} <span className="text-2xl">years old</span>
               </p>
             </div>
@@ -72,8 +72,8 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
       <FireChart data={result.chartData} targetAmount={result.targetNumber} />
 
       {/* --- 资金详情卡片 --- */}
-      <div className="bg-white p-6 md:p-8 rounded-xl mt-6 w-full shadow-xl border border-gray-100">
-        <p className="text-2xl font-bold text-center mb-6 text-gray-800">
+      <div className=" p-6 md:p-8 rounded-xl mt-6 w-full shadow-xl border border-gray-100">
+        <p className="text-2xl font-bold text-center mb-6  text-base-content">
           How your money grows
         </p>
 
@@ -98,9 +98,9 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-purple-500 rounded-full"></div>{" "}
               {/* 🟣 紫色 */}
-              <p className="text-sm md:text-base text-gray-600">
+              <p className="text-sm md:text-base text-gray-400">
                 Principal:{" "}
-                <span className="font-semibold text-gray-800">
+                <span className="font-semibold  text-base-content">
                   {formatMoney(result.principal)}
                 </span>
               </p>
@@ -109,9 +109,9 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>{" "}
               {/* 🟢 绿色 */}
-              <p className="text-sm md:text-base text-gray-600">
+              <p className="text-sm md:text-base text-gray-400">
                 Interest:{" "}
-                <span className="font-semibold text-gray-800">
+                <span className="font-semibold  text-base-content">
                   {formatMoney(result.interest)}
                 </span>
               </p>
@@ -121,21 +121,21 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
 
         {/* 资产明细 Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-          <div className="card-body bg-gray-50 rounded-lg p-4 text-center border border-gray-100">
-            <span className="text-sm text-gray-500">Stocks / ETFs</span>
-            <p className="text-2xl md:text-3xl font-bold text-gray-800">
+          <div className="card-body  text-base-content rounded-lg p-4 text-center border border-gray-200">
+            <span className="text-sm  text-base-content">Stocks / ETFs</span>
+            <p className="text-2xl md:text-3xl font-bold  text-base-content">
               {formatMoney(result.breakdown.stock)}
             </p>
           </div>
-          <div className="card-body bg-gray-50 rounded-lg p-4 text-center border border-gray-100">
-            <span className="text-sm text-gray-500">Bonds / MMF</span>
-            <p className="text-2xl md:text-3xl font-bold text-gray-800">
+          <div className="card-body  text-base-content rounded-lg p-4 text-center border border-gray-200">
+            <span className="text-sm  text-base-content">Bonds / MMF</span>
+            <p className="text-2xl md:text-3xl font-bold  text-base-content">
               {formatMoney(result.breakdown.bond)}
             </p>
           </div>
-          <div className="card-body bg-gray-50 rounded-lg p-4 text-center border border-gray-100">
-            <span className="text-sm text-gray-500">Cash / Savings</span>
-            <p className="text-2xl md:text-3xl font-bold text-gray-800">
+          <div className="card-body  text-base-content rounded-lg p-4 text-center border border-gray-200">
+            <span className="text-sm  text-base-content">Cash / Savings</span>
+            <p className="text-2xl md:text-3xl font-bold  text-base-content">
               {formatMoney(result.breakdown.cash)}
             </p>
           </div>

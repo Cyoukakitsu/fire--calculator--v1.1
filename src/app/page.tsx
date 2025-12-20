@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 //引入hook
 import { useFireCalculator } from "@/hooks/useFireCalculator";
 import { usePageScroll } from "@/hooks/usePageScroll";
@@ -57,7 +55,7 @@ function Home() {
 
         {/* 中间：按钮 */}
         <button
-          className="btn btn-neutral w-11/12 md:w-80 btn-outline mb-10 text-lg "
+          className="btn text-base-content  w-11/12 md:w-80 btn-outline btn-accent mb-10 text-lg "
           onClick={handleAnalyze}
         >
           Analyze

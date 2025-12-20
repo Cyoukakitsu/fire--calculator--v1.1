@@ -20,7 +20,7 @@ function Navbar() {
             className="w-8 h-8 "
           />
 
-          <span className="text-black">Fire calculator</span>
+          <span className=" text-base-content">Fire calculator</span>
         </Link>
       </div>
 
