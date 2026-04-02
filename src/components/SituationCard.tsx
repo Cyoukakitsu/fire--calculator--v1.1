@@ -31,10 +31,28 @@ function SituationCard({
           </label>
           <input
             type="number"
+            name="currentAge"
             min="0"
             className="input input-bordered w-full md:w-80"
             placeholder="25"
             value={inputs.currentAge}
+            onChange={handleInputChange}
+            onWheel={(e) => (e.target as HTMLInputElement).blur()}
+          />
+        </div>
+
+        {/* Target Age */}
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-4">
+          <label className="text-lg md:text-xl font-semibold w-full md:w-40 text-left md:text-right">
+            Simulation Age
+          </label>
+          <input
+            type="number"
+            name="targetAge"
+            min="0"
+            className="input input-bordered w-full md:w-80"
+            placeholder="50"
+            value={inputs.targetAge}
             onChange={handleInputChange}
             onWheel={(e) => (e.target as HTMLInputElement).blur()}
           />
@@ -47,6 +65,7 @@ function SituationCard({
           </label>
           <input
             type="number"
+            name="currentSavings"
             min="0"
             className="input input-bordered w-full md:w-80"
             placeholder="1,000,000"
@@ -73,6 +92,7 @@ function SituationCard({
           </label>
           <input
             type="number"
+            name="annualSpending"
             min="0"
             className="input input-bordered w-full md:w-80"
             value={inputs.annualSpending}
@@ -88,6 +108,7 @@ function SituationCard({
           </label>
           <input
             type="range"
+            name="inflationRate"
             min={0}
             max="10"
             className="range range-neutral w-full md:w-80"

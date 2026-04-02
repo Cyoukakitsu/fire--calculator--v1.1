@@ -34,6 +34,7 @@ function StrategyCard({
         </legend>
         <input
           type="number"
+          name="stockYearly"
           min="0"
           className="input input-bordered w-full"
           placeholder="100,000"
@@ -46,6 +47,7 @@ function StrategyCard({
           <p className="text-base ">Growth rate</p>
           <input
             type="number"
+            name="stockReturn"
             step="0.1"
             className="input input-bordered input-sm w-20 join-item text-right"
             value={inputs.stockReturn}
@@ -62,6 +64,7 @@ function StrategyCard({
         </legend>
         <input
           type="number"
+          name="bondYearly"
           min="0"
           className="input input-bordered w-full"
           value={inputs.bondYearly}
@@ -73,6 +76,7 @@ function StrategyCard({
           <p className="text-base ">Growth rate</p>
           <input
             type="number"
+            name="bondReturn"
             step="0.1"
             className="input input-bordered input-sm w-20 join-item text-right"
             value={inputs.bondReturn}
@@ -89,6 +93,7 @@ function StrategyCard({
         </legend>
         <input
           type="number"
+          name="cashYearly"
           min="0"
           className="input input-bordered w-full"
           value={inputs.cashYearly}
@@ -100,6 +105,7 @@ function StrategyCard({
           <p className="text-base ">Growth rate</p>
           <input
             type="number"
+            name="cashReturn"
             step="0.1"
             className="input input-bordered input-sm w-20 join-item text-right"
             value={inputs.cashReturn}
