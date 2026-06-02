@@ -4,17 +4,13 @@ import React from "react";
 import Image from "next/image";
 import { FireInputs } from "@/types";
 
-// 注意路径：根据你的文件结构，可能是 ../photo/ 或 ./photo/
-// import Warren_Buffett from "../photo/Warren_Buffett.png";
-// import Ray_Dalio from "../photo/Ray_Dalio.png";
-// import Peter_Lynch from "../photo/Peter_Lynch.png";
-
 interface StrategyCardProps {
   inputs: FireInputs;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   investorRef: React.RefObject<HTMLElement | null>;
   onScrollToInvestors: () => void;
 }
+
 function StrategyCard({
   inputs,
   handleInputChange,
@@ -22,7 +18,7 @@ function StrategyCard({
   onScrollToInvestors,
 }: StrategyCardProps) {
   return (
-    <div className="bg-base-100 p-8 pt-8 pb-4 rounded-xl mt-10 w-full max-w-162.5 shadow-sm">
+    <div className="bg-card text-card-foreground p-8 pt-8 pb-4 rounded-xl mt-10 w-full max-w-162.5 border border-border shadow-sm">
       <p className="text-4xl font-bold text-center mb-6">
         Your investing strategy
       </p>
@@ -42,9 +38,8 @@ function StrategyCard({
           onChange={handleInputChange}
           onWheel={(e) => (e.target as HTMLInputElement).blur()}
         />
-        {/* 响应式优化：已应用 flex justify-end，很好！ */}
         <div className="flex items-center justify-end gap-2 mt-2">
-          <p className="text-base ">Growth rate</p>
+          <p className="text-base">Growth rate</p>
           <input
             type="number"
             name="stockReturn"
@@ -73,7 +68,7 @@ function StrategyCard({
           onWheel={(e) => (e.target as HTMLInputElement).blur()}
         />
         <div className="flex items-center justify-end gap-2 mt-2">
-          <p className="text-base ">Growth rate</p>
+          <p className="text-base">Growth rate</p>
           <input
             type="number"
             name="bondReturn"
@@ -102,7 +97,7 @@ function StrategyCard({
           onWheel={(e) => (e.target as HTMLInputElement).blur()}
         />
         <div className="flex items-center justify-end gap-2 mt-2">
-          <p className="text-base ">Growth rate</p>
+          <p className="text-base">Growth rate</p>
           <input
             type="number"
             name="cashReturn"
@@ -117,21 +112,20 @@ function StrategyCard({
 
       {/* Investors Strategy */}
       <fieldset className="fieldset">
-        <div className="divider mt-3 ">
-          <p className="text-base font-light">
-            I don&apos;t have investing strategy 😫
+        <div className="divider mt-3">
+          <p className="text-base font-light text-muted-foreground">
+            I don&apos;t have investing strategy
           </p>
         </div>
         <details
-          className="collapse bg-base-100 border border-base-300"
+          className="collapse bg-card border border-border"
           ref={investorRef as React.RefObject<HTMLDetailsElement>}
         >
           <summary
-            className=" text-center font-bold btn flex"
-            // 注意：这里使用了修正后的 prop 名字
+            className="text-center font-bold btn flex cursor-pointer"
             onClick={onScrollToInvestors}
           >
-            Three investors&apos; strategies for you to choose ⬇️
+            Three investors&apos; strategies for you to choose
           </summary>
 
           <div className="carousel w-full">
@@ -145,11 +139,10 @@ function StrategyCard({
                 className="w-full object-cover rounded-xl"
               />
               <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                {/* 修复：上一张指向 #slide3 (因为只有3张图) */}
-                <a href="#slide3" className="btn btn-circle btn-xs">
+                <a href="#slide3" className="btn btn-circle btn-xs cursor-pointer">
                   ❮
                 </a>
-                <a href="#slide2" className="btn btn-circle btn-xs">
+                <a href="#slide2" className="btn btn-circle btn-xs cursor-pointer">
                   ❯
                 </a>
               </div>
@@ -165,10 +158,10 @@ function StrategyCard({
                 className="w-full object-cover rounded-xl"
               />
               <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                <a href="#slide1" className="btn btn-circle btn-xs">
+                <a href="#slide1" className="btn btn-circle btn-xs cursor-pointer">
                   ❮
                 </a>
-                <a href="#slide3" className="btn btn-circle btn-xs">
+                <a href="#slide3" className="btn btn-circle btn-xs cursor-pointer">
                   ❯
                 </a>
               </div>
@@ -184,11 +177,10 @@ function StrategyCard({
                 className="w-full object-cover rounded-xl"
               />
               <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                <a href="#slide2" className="btn btn-circle btn-xs ">
+                <a href="#slide2" className="btn btn-circle btn-xs cursor-pointer">
                   ❮
                 </a>
-                {/* 修复：下一张指向 #slide1 */}
-                <a href="#slide1" className="btn btn-circle btn-xs">
+                <a href="#slide1" className="btn btn-circle btn-xs cursor-pointer">
                   ❯
                 </a>
               </div>
