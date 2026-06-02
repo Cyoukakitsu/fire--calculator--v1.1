@@ -20,7 +20,7 @@ function Home() {
     <>
       <Navbar />
 
-      <div className="bg-base-200 min-h-screen w-full flex flex-col items-center overflow-y-auto overflow-x-hidden py-4">
+      <div className="bg-background min-h-screen w-full flex flex-col items-center overflow-y-auto overflow-x-hidden py-4">
         <div className="text-center max-w-8xl mb-5 px-4">
           <div className="font-semibold text-4xl md:text-6xl mb-4">
             FIRE calculator
