@@ -8,6 +8,14 @@ import SituationCard from "@/components/SituationCard";
 import StrategyCard from "@/components/StrategyCard";
 import ResultSection from "@/components/ResultSection";
 
+const TICKER_ITEMS = [
+  "4% SAFE WITHDRAWAL RULE",
+  "25× ANNUAL SPEND = FIRE NUMBER",
+  "COMPOUND GROWTH: TIME × PATIENCE",
+  "PORTFOLIO: STOCKS · BONDS · CASH",
+  "FIRE = FINANCIAL INDEPENDENCE, RETIRE EARLY",
+];
+
 function Home() {
   const { inputs, handleInputChange, result, handleAnalyze } =
     useFireCalculator();
@@ -17,6 +25,21 @@ function Home() {
   return (
     <>
       <Navbar />
+
+      {/* Financial ticker bar */}
+      <div className="w-full border-b border-border bg-primary overflow-hidden py-2">
+        <div className="flex gap-12 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
+          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+            <span
+              key={i}
+              className="font-mono text-xs text-primary-foreground tracking-[0.15em] opacity-90 shrink-0"
+            >
+              {item}
+              <span className="mx-6 opacity-40">·</span>
+            </span>
+          ))}
+        </div>
+      </div>
 
       <div className="bg-background min-h-screen w-full overflow-y-auto overflow-x-hidden">
         {/* Editorial Hero */}
@@ -53,25 +76,28 @@ function Home() {
         </div>
 
         {/* Input Cards */}
-        <div className="flex justify-center gap-8 flex-wrap items-start w-full px-4 md:px-6 mt-8 mb-8">
-          <SituationCard
-            inputs={inputs}
-            handleInputChange={handleInputChange}
-            fireModelsRef={refs.fireModelsRef}
-            onScrollToModels={handlers.handleScrollToModels}
-          />
-          <StrategyCard
-            inputs={inputs}
-            handleInputChange={handleInputChange}
-            investorRef={refs.investorRef}
-            onScrollToInvestors={handlers.handleScrollToInvestor}
-          />
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-6 mt-8 mb-8">
+          <div className="flex justify-center gap-6 flex-wrap items-start">
+            <SituationCard
+              inputs={inputs}
+              handleInputChange={handleInputChange}
+              fireModelsRef={refs.fireModelsRef}
+              onScrollToModels={handlers.handleScrollToModels}
+            />
+            <StrategyCard
+              inputs={inputs}
+              handleInputChange={handleInputChange}
+              investorRef={refs.investorRef}
+              onScrollToInvestors={handlers.handleScrollToInvestor}
+            />
+          </div>
         </div>
 
         {/* CTA */}
         <div className="w-full max-w-7xl mx-auto px-4 md:px-6 mb-14">
           <button
-            className="w-full md:w-auto px-12 py-4 bg-primary text-primary-foreground font-bold text-sm tracking-[0.15em] uppercase hover:opacity-90 active:scale-[0.99] transition-all duration-200 cursor-pointer rounded-none"
+            style={{ borderRadius: 0 }}
+            className="w-full md:w-auto px-12 py-4 bg-primary text-primary-foreground font-bold text-sm tracking-[0.18em] uppercase hover:opacity-90 active:scale-[0.99] transition-all duration-200 cursor-pointer"
             onClick={handleAnalyze}
           >
             Analyze my FIRE path →
@@ -87,6 +113,13 @@ function Home() {
           />
         )}
       </div>
+
+      <style>{`
+        @keyframes scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+      `}</style>
     </>
   );
 }

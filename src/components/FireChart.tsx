@@ -19,6 +19,9 @@ interface FireChartProps {
   targetAmount: number;
 }
 
+const AMBER = "#d97706";
+const TEAL = "#0891b2";
+
 const FireChart = ({ data, targetAmount }: FireChartProps) => {
   if (!data || data.length === 0)
     return (
@@ -44,18 +47,18 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
 
   return (
     <div className="w-full border border-border mt-6 bg-card">
-      <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/50">
+      <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
         <span className="font-mono text-xs text-primary tracking-widest font-bold">~</span>
         <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
           FIRE Projection
         </h3>
         <div className="ml-auto flex items-center gap-5">
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 bg-chart-1 shrink-0" />
+            <span className="w-2 h-2 shrink-0" style={{ background: AMBER }} />
             <span className="text-xs text-muted-foreground font-mono">Principal</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 bg-chart-2 shrink-0" />
+            <span className="w-2 h-2 shrink-0" style={{ background: TEAL }} />
             <span className="text-xs text-muted-foreground font-mono">Interest</span>
           </div>
         </div>
@@ -65,23 +68,23 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={stackedData}
-            margin={{ top: 20, right: 0, left: -10, bottom: 0 }}
+            margin={{ top: 24, right: 0, left: -10, bottom: 0 }}
           >
             <defs>
               <linearGradient id="colorInterest" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0891b2" stopOpacity={0.6} />
-                <stop offset="95%" stopColor="#0891b2" stopOpacity={0.05} />
+                <stop offset="5%" stopColor={TEAL} stopOpacity={0.55} />
+                <stop offset="95%" stopColor={TEAL} stopOpacity={0.04} />
               </linearGradient>
               <linearGradient id="colorPrincipal" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#d97706" stopOpacity={0.6} />
-                <stop offset="95%" stopColor="#d97706" stopOpacity={0.05} />
+                <stop offset="5%" stopColor={AMBER} stopOpacity={0.55} />
+                <stop offset="95%" stopColor={AMBER} stopOpacity={0.04} />
               </linearGradient>
             </defs>
 
             <CartesianGrid
               strokeDasharray="3 3"
               vertical={false}
-              opacity={0.15}
+              opacity={0.12}
             />
 
             <XAxis
@@ -89,7 +92,6 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
               axisLine={false}
               tickLine={false}
               tick={{ fill: "#9CA3AF", fontSize: 11, fontFamily: "Space Mono, monospace" }}
-              tickFormatter={(val) => `${val}`}
             />
 
             <YAxis
@@ -103,10 +105,12 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
             <Tooltip
               contentStyle={{
                 borderRadius: "2px",
-                border: "1px solid oklch(0.80 0.02 85)",
-                boxShadow: "0 4px 12px -2px rgba(0,0,0,0.12)",
+                border: "1px solid #D4C5B0",
+                boxShadow: "0 4px 12px -2px rgba(0,0,0,0.15)",
                 fontFamily: "Space Mono, monospace",
-                fontSize: "12px",
+                fontSize: "11px",
+                background: "#FEFCF8",
+                color: "#1C1917",
               }}
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               formatter={(value: any, name: any) => {
@@ -125,14 +129,14 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
             {targetAmount && (
               <ReferenceLine
                 y={targetAmount}
-                stroke="#d97706"
+                stroke={AMBER}
                 strokeDasharray="4 4"
-                strokeOpacity={0.8}
+                strokeOpacity={0.75}
               >
                 <Label
                   value={`Goal: ${formatCurrency(targetAmount)}`}
                   position="insideTopLeft"
-                  fill="#d97706"
+                  fill={AMBER}
                   fontSize={11}
                   fontWeight="bold"
                   fontFamily="Space Mono, monospace"
@@ -145,7 +149,7 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
               type="monotone"
               dataKey="principal"
               stackId="1"
-              stroke="#d97706"
+              stroke={AMBER}
               strokeWidth={1.5}
               fill="url(#colorPrincipal)"
               name="Principal"
@@ -155,7 +159,7 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
               type="monotone"
               dataKey="interest"
               stackId="1"
-              stroke="#0891b2"
+              stroke={TEAL}
               strokeWidth={1.5}
               fill="url(#colorInterest)"
               name="Interest"

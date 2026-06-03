@@ -18,9 +18,9 @@ function StrategyCard({
   onScrollToInvestors,
 }: StrategyCardProps) {
   return (
-    <div className="w-full max-w-[600px] border border-border bg-card shadow-sm">
-      <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/50">
-        <span className="font-mono text-xs text-primary tracking-widest font-bold">03</span>
+    <div className="w-full max-w-[600px] border border-border border-l-4 border-l-secondary bg-card">
+      <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
+        <span className="font-mono text-xs text-secondary tracking-widest font-bold">03</span>
         <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
           Investing Strategy
         </h2>
@@ -29,23 +29,23 @@ function StrategyCard({
       <div className="px-6 py-6 space-y-6">
         {/* Stocks */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-chart-1 rounded-none shrink-0" />
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-foreground">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-2.5 h-2.5 bg-chart-1 shrink-0" />
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-foreground">
               Stocks / ETFs
             </span>
-            <span className="text-xs text-muted-foreground ml-auto">yearly</span>
+            <span className="text-xs text-muted-foreground ml-auto font-mono">per year</span>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center flex-1">
-              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 rounded-l-sm text-sm text-muted-foreground font-mono shrink-0">
+            <div className="flex items-center flex-1 min-w-0">
+              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 text-sm text-muted-foreground font-mono shrink-0">
                 ¥
               </span>
               <input
                 type="number"
                 name="stockYearly"
                 min="0"
-                className="input input-bordered flex-1 rounded-l-none rounded-r-sm text-sm min-w-0"
+                className="input input-bordered flex-1 border-l-0 text-sm min-w-0"
                 placeholder="100,000"
                 value={inputs.stockYearly}
                 onChange={handleInputChange}
@@ -53,13 +53,13 @@ function StrategyCard({
               />
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs text-muted-foreground whitespace-nowrap">Growth</span>
+              <span className="text-xs text-muted-foreground">Growth</span>
               <div className="relative">
                 <input
                   type="number"
                   name="stockReturn"
                   step="0.1"
-                  className="input input-bordered input-sm w-20 text-right pr-5 rounded-sm text-sm"
+                  className="input input-bordered input-sm w-20 text-right pr-5 text-sm"
                   value={inputs.stockReturn}
                   onChange={handleInputChange}
                   onWheel={(e) => (e.target as HTMLInputElement).blur()}
@@ -70,25 +70,27 @@ function StrategyCard({
           </div>
         </div>
 
+        <div className="h-px bg-border" />
+
         {/* Bonds */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-chart-2 rounded-none shrink-0" />
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-foreground">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-2.5 h-2.5 bg-chart-2 shrink-0" />
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-foreground">
               MMF / Bonds
             </span>
-            <span className="text-xs text-muted-foreground ml-auto">yearly</span>
+            <span className="text-xs text-muted-foreground ml-auto font-mono">per year</span>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center flex-1">
-              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 rounded-l-sm text-sm text-muted-foreground font-mono shrink-0">
+            <div className="flex items-center flex-1 min-w-0">
+              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 text-sm text-muted-foreground font-mono shrink-0">
                 ¥
               </span>
               <input
                 type="number"
                 name="bondYearly"
                 min="0"
-                className="input input-bordered flex-1 rounded-l-none rounded-r-sm text-sm min-w-0"
+                className="input input-bordered flex-1 border-l-0 text-sm min-w-0"
                 placeholder="100,000"
                 value={inputs.bondYearly}
                 onChange={handleInputChange}
@@ -96,13 +98,13 @@ function StrategyCard({
               />
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs text-muted-foreground whitespace-nowrap">Growth</span>
+              <span className="text-xs text-muted-foreground">Growth</span>
               <div className="relative">
                 <input
                   type="number"
                   name="bondReturn"
                   step="0.1"
-                  className="input input-bordered input-sm w-20 text-right pr-5 rounded-sm text-sm"
+                  className="input input-bordered input-sm w-20 text-right pr-5 text-sm"
                   value={inputs.bondReturn}
                   onChange={handleInputChange}
                   onWheel={(e) => (e.target as HTMLInputElement).blur()}
@@ -113,25 +115,27 @@ function StrategyCard({
           </div>
         </div>
 
+        <div className="h-px bg-border" />
+
         {/* Cash */}
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-chart-3 rounded-none shrink-0" />
-            <span className="text-xs font-bold uppercase tracking-[0.12em] text-foreground">
+          <div className="flex items-center gap-2 mb-2">
+            <div className="w-2.5 h-2.5 bg-chart-3 shrink-0" />
+            <span className="text-xs font-bold uppercase tracking-[0.14em] text-foreground">
               Cash / Savings
             </span>
-            <span className="text-xs text-muted-foreground ml-auto">yearly</span>
+            <span className="text-xs text-muted-foreground ml-auto font-mono">per year</span>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center flex-1">
-              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 rounded-l-sm text-sm text-muted-foreground font-mono shrink-0">
+            <div className="flex items-center flex-1 min-w-0">
+              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 text-sm text-muted-foreground font-mono shrink-0">
                 ¥
               </span>
               <input
                 type="number"
                 name="cashYearly"
                 min="0"
-                className="input input-bordered flex-1 rounded-l-none rounded-r-sm text-sm min-w-0"
+                className="input input-bordered flex-1 border-l-0 text-sm min-w-0"
                 placeholder="100,000"
                 value={inputs.cashYearly}
                 onChange={handleInputChange}
@@ -139,13 +143,13 @@ function StrategyCard({
               />
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs text-muted-foreground whitespace-nowrap">Growth</span>
+              <span className="text-xs text-muted-foreground">Growth</span>
               <div className="relative">
                 <input
                   type="number"
                   name="cashReturn"
                   step="0.1"
-                  className="input input-bordered input-sm w-20 text-right pr-5 rounded-sm text-sm"
+                  className="input input-bordered input-sm w-20 text-right pr-5 text-sm"
                   value={inputs.cashReturn}
                   onChange={handleInputChange}
                   onWheel={(e) => (e.target as HTMLInputElement).blur()}
@@ -157,7 +161,7 @@ function StrategyCard({
         </div>
 
         {/* Investor Strategies */}
-        <div className="pt-2">
+        <div className="pt-1">
           <div className="flex items-center gap-3 mb-3">
             <div className="flex-1 h-px bg-border" />
             <p className="text-xs text-muted-foreground font-mono whitespace-nowrap">
@@ -175,7 +179,7 @@ function StrategyCard({
               onClick={onScrollToInvestors}
             >
               <span>Three investor strategies</span>
-              <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-muted-foreground shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </summary>

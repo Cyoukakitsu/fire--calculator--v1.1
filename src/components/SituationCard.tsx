@@ -19,8 +19,8 @@ function SituationCard({
   return (
     <div className="flex flex-col w-full max-w-[600px]">
       {/* Section 01: Situation */}
-      <div className="w-full border border-border bg-card shadow-sm">
-        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/50">
+      <div className="w-full border border-border border-l-4 border-l-primary bg-card">
+        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
           <span className="font-mono text-xs text-primary tracking-widest font-bold">01</span>
           <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
             Your Situation
@@ -37,7 +37,7 @@ function SituationCard({
               type="number"
               name="currentAge"
               min="0"
-              className="input input-bordered w-full sm:flex-1 rounded-sm text-sm"
+              className="input input-bordered w-full sm:flex-1 text-sm"
               placeholder="25"
               value={inputs.currentAge}
               onChange={handleInputChange}
@@ -54,7 +54,7 @@ function SituationCard({
               type="number"
               name="targetAge"
               min="0"
-              className="input input-bordered w-full sm:flex-1 rounded-sm text-sm"
+              className="input input-bordered w-full sm:flex-1 text-sm"
               placeholder="50"
               value={inputs.targetAge}
               onChange={handleInputChange}
@@ -68,14 +68,14 @@ function SituationCard({
               Current Savings
             </label>
             <div className="flex items-center w-full sm:flex-1">
-              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 rounded-l-sm text-sm text-muted-foreground font-mono">
+              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 text-sm text-muted-foreground font-mono shrink-0">
                 ¥
               </span>
               <input
                 type="number"
                 name="currentSavings"
                 min="0"
-                className="input input-bordered flex-1 rounded-l-none rounded-r-sm text-sm"
+                className="input input-bordered flex-1 border-l-0 text-sm"
                 placeholder="1,000,000"
                 value={inputs.currentSavings}
                 onChange={handleInputChange}
@@ -86,9 +86,9 @@ function SituationCard({
         </div>
       </div>
 
-      {/* Section 02: Retirement */}
-      <div className="w-full border border-border border-t-0 bg-card shadow-sm">
-        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/50">
+      {/* Section 02: Retirement — attached below 01 */}
+      <div className="w-full border border-border border-t-0 border-l-4 border-l-primary bg-card">
+        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
           <span className="font-mono text-xs text-primary tracking-widest font-bold">02</span>
           <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
             Your Retirement
@@ -99,17 +99,17 @@ function SituationCard({
           {/* Target Spending */}
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5">
             <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0 leading-tight">
-              Post-FIRE Annual<br className="hidden sm:block" /> Spending
+              Post-FIRE Annual Spending
             </label>
             <div className="flex items-center w-full sm:flex-1">
-              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 rounded-l-sm text-sm text-muted-foreground font-mono">
+              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 text-sm text-muted-foreground font-mono shrink-0">
                 ¥
               </span>
               <input
                 type="number"
                 name="annualSpending"
                 min="0"
-                className="input input-bordered flex-1 rounded-l-none rounded-r-sm text-sm"
+                className="input input-bordered flex-1 border-l-0 text-sm"
                 value={inputs.annualSpending}
                 onChange={handleInputChange}
                 onWheel={(e) => (e.target as HTMLInputElement).blur()}
@@ -118,8 +118,8 @@ function SituationCard({
           </div>
 
           {/* Inflation Rate */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
-            <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0">
+          <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5">
+            <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0 sm:pt-1">
               Annual Inflation
             </label>
             <div className="flex flex-col w-full sm:flex-1 gap-1">
@@ -160,7 +160,7 @@ function SituationCard({
                 onClick={onScrollToModels}
               >
                 <span>5 FIRE models for reference</span>
-                <svg className="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-muted-foreground shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </summary>
@@ -175,7 +175,7 @@ function SituationCard({
                 ].map((m) => (
                   <div key={m.num} className="px-4 py-3">
                     <div className="flex items-baseline gap-3">
-                      <span className="font-mono text-xs text-primary">{m.num}.</span>
+                      <span className="font-mono text-xs text-primary shrink-0">{m.num}.</span>
                       <div>
                         <p className="text-sm font-semibold text-foreground">{m.name}</p>
                         <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{m.desc}</p>
