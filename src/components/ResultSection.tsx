@@ -20,46 +20,46 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
 
   return (
     <div
-      className="flex flex-col items-center max-w-4xl w-full px-4 mb-10"
+      className="w-full max-w-7xl mx-auto px-4 md:px-6 pb-16"
       ref={resultRef as React.RefObject<HTMLDivElement>}
     >
-      {/* 头部标题 */}
-      <div className="text-center mt-10">
-        <p className="font-semibold text-3xl md:text-4xl mb-2 text-foreground">
-          Your FIRE Path
-        </p>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto font-thin text-muted-foreground">
-          Financial projection based on current strategy
-        </p>
-      </div>
+      {/* Results Header */}
+      <div className="border-t-2 border-foreground mt-10 pt-8">
+        <div className="flex items-center gap-4 mb-8">
+          <span className="font-mono text-xs tracking-[0.22em] text-muted-foreground uppercase">
+            Financial Projection
+          </span>
+          <div className="flex-1 h-px bg-border" />
+          <span className="font-mono text-xs tracking-[0.22em] text-primary uppercase">
+            Your FIRE Path
+          </span>
+        </div>
 
-      <div className="w-full">
-        {/* 核心结果卡片 */}
-        <div className="bg-card p-6 md:p-8 rounded-xl mt-6 w-full border border-border">
-          <p className="text-2xl font-bold text-center mb-6 text-card-foreground">
-            Result
-          </p>
+        {/* Hero metrics */}
+        <div className="flex flex-col md:flex-row md:items-end gap-8 md:gap-16 mb-10">
+          <div>
+            <p className="font-mono text-xs text-muted-foreground tracking-[0.2em] uppercase mb-1">
+              FIRE Age
+            </p>
+            <p className="text-[7rem] md:text-[9rem] font-bold tracking-tighter leading-none text-foreground">
+              {result.fireAge}
+            </p>
+          </div>
 
-          <div className="flex flex-col md:flex-row justify-between text-center gap-8 md:gap-0">
+          <div className="flex flex-row md:flex-col gap-8 md:gap-5 pb-3">
             <div>
-              <p className="text-muted-foreground mb-1">Fire Age</p>
-              <p className="text-4xl md:text-5xl font-bold text-foreground">
-                {result.fireAge} <span className="text-2xl">years old</span>
+              <p className="font-mono text-xs text-muted-foreground tracking-[0.2em] uppercase mb-1">
+                Inflation Used
+              </p>
+              <p className="text-3xl font-bold text-accent">
+                {inputs.inflationRate}%
               </p>
             </div>
-
-            {inputs && (
-              <div>
-                <p className="text-muted-foreground mb-1">Inflation Used</p>
-                <p className="text-4xl md:text-5xl font-bold text-accent">
-                  {inputs.inflationRate}%
-                </p>
-              </div>
-            )}
-
             <div>
-              <p className="text-muted-foreground mb-1">Target Number</p>
-              <p className="text-4xl md:text-5xl font-bold text-primary">
+              <p className="font-mono text-xs text-muted-foreground tracking-[0.2em] uppercase mb-1">
+                Target Number
+              </p>
+              <p className="text-2xl font-bold text-primary">
                 {formatMoney(result.targetNumber)}
               </p>
             </div>
@@ -67,69 +67,78 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
         </div>
       </div>
 
-      {/* 图表组件 */}
+      {/* Chart */}
       <FireChart data={result.chartData} targetAmount={result.targetNumber} />
 
-      {/* 资金详情卡片 */}
-      <div className="bg-card p-6 md:p-8 rounded-xl mt-6 w-full border border-border">
-        <p className="text-2xl font-bold text-center mb-6 text-card-foreground">
-          How your money grows
-        </p>
+      {/* Money Breakdown */}
+      <div className="border border-border mt-6">
+        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/50">
+          <span className="font-mono text-xs text-primary tracking-widest font-bold">—</span>
+          <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
+            How Your Money Grows
+          </h3>
+        </div>
 
-        {/* 双色进度条 */}
-        <div className="p-2 md:p-4">
-          <div className="w-full h-4 flex rounded-full overflow-hidden bg-muted">
+        <div className="p-6">
+          {/* Progress bar */}
+          <div className="w-full h-1.5 flex overflow-hidden bg-muted mb-4">
             <div
               style={{ width: `${principalPct}%` }}
               className="bg-chart-1 transition-all duration-1000"
-            ></div>
+            />
             <div
               style={{ width: `${interestPct}%` }}
               className="bg-chart-2 transition-all duration-1000"
-            ></div>
+            />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-10 mt-4">
+          <div className="flex flex-wrap gap-6 mb-6">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-chart-1 rounded-full"></div>
-              <p className="text-sm md:text-base text-muted-foreground">
+              <div className="w-2 h-2 bg-chart-1 shrink-0" />
+              <span className="text-xs text-muted-foreground">
                 Principal:{" "}
-                <span className="font-semibold text-foreground">
+                <strong className="text-foreground font-semibold">
                   {formatMoney(result.principal)}
-                </span>
-              </p>
+                </strong>
+              </span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-chart-2 rounded-full"></div>
-              <p className="text-sm md:text-base text-muted-foreground">
+              <div className="w-2 h-2 bg-chart-2 shrink-0" />
+              <span className="text-xs text-muted-foreground">
                 Interest:{" "}
-                <span className="font-semibold text-foreground">
+                <strong className="text-foreground font-semibold">
                   {formatMoney(result.interest)}
-                </span>
-              </p>
+                </strong>
+              </span>
             </div>
           </div>
-        </div>
 
-        {/* 资产明细 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-          <div className="rounded-lg p-4 text-center border border-border">
-            <span className="text-sm text-muted-foreground">Stocks / ETFs</span>
-            <p className="text-2xl md:text-3xl font-bold text-foreground">
-              {formatMoney(result.breakdown.stock)}
-            </p>
-          </div>
-          <div className="rounded-lg p-4 text-center border border-border">
-            <span className="text-sm text-muted-foreground">Bonds / MMF</span>
-            <p className="text-2xl md:text-3xl font-bold text-foreground">
-              {formatMoney(result.breakdown.bond)}
-            </p>
-          </div>
-          <div className="rounded-lg p-4 text-center border border-border">
-            <span className="text-sm text-muted-foreground">Cash / Savings</span>
-            <p className="text-2xl md:text-3xl font-bold text-foreground">
-              {formatMoney(result.breakdown.cash)}
-            </p>
+          {/* Breakdown grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="border-l-2 border-chart-1 pl-4 py-2">
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                Stocks / ETFs
+              </span>
+              <p className="text-xl font-bold text-foreground mt-0.5">
+                {formatMoney(result.breakdown.stock)}
+              </p>
+            </div>
+            <div className="border-l-2 border-chart-2 pl-4 py-2">
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                Bonds / MMF
+              </span>
+              <p className="text-xl font-bold text-foreground mt-0.5">
+                {formatMoney(result.breakdown.bond)}
+              </p>
+            </div>
+            <div className="border-l-2 border-chart-3 pl-4 py-2">
+              <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
+                Cash / Savings
+              </span>
+              <p className="text-xl font-bold text-foreground mt-0.5">
+                {formatMoney(result.breakdown.cash)}
+              </p>
+            </div>
           </div>
         </div>
       </div>

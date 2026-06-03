@@ -21,7 +21,11 @@ interface FireChartProps {
 
 const FireChart = ({ data, targetAmount }: FireChartProps) => {
   if (!data || data.length === 0)
-    return <div className="p-10 text-center text-muted-foreground">No Data</div>;
+    return (
+      <div className="p-10 text-center text-muted-foreground font-mono text-sm">
+        No Data
+      </div>
+    );
 
   const stackedData = data.map((item) => {
     const interest = item.assets - item.principal;
@@ -39,24 +43,25 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
   };
 
   return (
-    <div className="w-full h-96 max-w-4xl mx-auto mt-8 bg-card p-4 md:p-6 rounded-2xl border border-border flex flex-col overflow-hidden">
-      <div className="text-center mb-6 shrink-0">
-        <h3 className="text-xl font-bold text-card-foreground">
-          Your FIRE Projection
+    <div className="w-full border border-border mt-6 bg-card">
+      <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/50">
+        <span className="font-mono text-xs text-primary tracking-widest font-bold">~</span>
+        <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
+          FIRE Projection
         </h3>
-        <div className="flex justify-center gap-4 mt-2 text-sm">
-          <div className="flex items-center gap-1">
-            <span className="w-3 h-3 rounded-full bg-chart-1"></span>
-            <span className="text-muted-foreground">Principal</span>
+        <div className="ml-auto flex items-center gap-5">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 bg-chart-1 shrink-0" />
+            <span className="text-xs text-muted-foreground font-mono">Principal</span>
           </div>
-          <div className="flex items-center gap-1">
-            <span className="w-3 h-3 rounded-full bg-chart-2"></span>
-            <span className="text-muted-foreground">Interest</span>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 bg-chart-2 shrink-0" />
+            <span className="text-xs text-muted-foreground font-mono">Interest</span>
           </div>
         </div>
       </div>
 
-      <div className="grow w-full min-h-0 min-w-0">
+      <div className="h-72 md:h-80 p-4 md:p-6">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={stackedData}
@@ -64,42 +69,44 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
           >
             <defs>
               <linearGradient id="colorInterest" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#10B981" stopOpacity={0.7} />
-                <stop offset="95%" stopColor="#10B981" stopOpacity={0.1} />
+                <stop offset="5%" stopColor="#0891b2" stopOpacity={0.6} />
+                <stop offset="95%" stopColor="#0891b2" stopOpacity={0.05} />
               </linearGradient>
               <linearGradient id="colorPrincipal" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.7} />
-                <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0.1} />
+                <stop offset="5%" stopColor="#d97706" stopOpacity={0.6} />
+                <stop offset="95%" stopColor="#d97706" stopOpacity={0.05} />
               </linearGradient>
             </defs>
 
             <CartesianGrid
               strokeDasharray="3 3"
               vertical={false}
-              opacity={0.2}
+              opacity={0.15}
             />
 
             <XAxis
               dataKey="age"
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#9CA3AF", fontSize: 12 }}
+              tick={{ fill: "#9CA3AF", fontSize: 11, fontFamily: "Space Mono, monospace" }}
               tickFormatter={(val) => `${val}`}
             />
 
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fill: "#9CA3AF", fontSize: 12 }}
+              tick={{ fill: "#9CA3AF", fontSize: 11, fontFamily: "Space Mono, monospace" }}
               tickFormatter={formatCurrency}
               width={55}
             />
 
             <Tooltip
               contentStyle={{
-                borderRadius: "12px",
-                border: "none",
-                boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+                borderRadius: "2px",
+                border: "1px solid oklch(0.80 0.02 85)",
+                boxShadow: "0 4px 12px -2px rgba(0,0,0,0.12)",
+                fontFamily: "Space Mono, monospace",
+                fontSize: "12px",
               }}
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               formatter={(value: any, name: any) => {
@@ -118,16 +125,18 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
             {targetAmount && (
               <ReferenceLine
                 y={targetAmount}
-                stroke="#059669"
-                strokeDasharray="5 5"
+                stroke="#d97706"
+                strokeDasharray="4 4"
+                strokeOpacity={0.8}
               >
                 <Label
                   value={`Goal: ${formatCurrency(targetAmount)}`}
                   position="insideTopLeft"
-                  fill="#059669"
-                  fontSize={14}
+                  fill="#d97706"
+                  fontSize={11}
                   fontWeight="bold"
-                  dy={-10}
+                  fontFamily="Space Mono, monospace"
+                  dy={-8}
                 />
               </ReferenceLine>
             )}
@@ -136,7 +145,8 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
               type="monotone"
               dataKey="principal"
               stackId="1"
-              stroke="#8B5CF6"
+              stroke="#d97706"
+              strokeWidth={1.5}
               fill="url(#colorPrincipal)"
               name="Principal"
             />
@@ -145,7 +155,8 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
               type="monotone"
               dataKey="interest"
               stackId="1"
-              stroke="#10B981"
+              stroke="#0891b2"
+              strokeWidth={1.5}
               fill="url(#colorInterest)"
               name="Interest"
             />

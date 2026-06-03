@@ -1,10 +1,8 @@
 "use client";
 
-//引入hook
 import { useFireCalculator } from "@/hooks/useFireCalculator";
 import { usePageScroll } from "@/hooks/usePageScroll";
 
-// 引入组件
 import Navbar from "@/components/Navbar";
 import SituationCard from "@/components/SituationCard";
 import StrategyCard from "@/components/StrategyCard";
@@ -20,31 +18,48 @@ function Home() {
     <>
       <Navbar />
 
-      <div className="bg-background min-h-screen w-full flex flex-col items-center overflow-y-auto overflow-x-hidden py-4">
-        <div className="text-center max-w-8xl mb-5 px-4">
-          <div className="font-semibold text-4xl md:text-6xl mb-4">
-            FIRE calculator
-            <p className="text-xl md:text-4xl mt-4">Find your Free Path</p>
+      <div className="bg-background min-h-screen w-full overflow-y-auto overflow-x-hidden">
+        {/* Editorial Hero */}
+        <div className="w-full max-w-7xl mx-auto px-6 pt-12 pb-0">
+          <div className="pb-6 border-b-2 border-foreground">
+            <div className="flex items-center gap-4 mb-5">
+              <span className="font-mono text-xs tracking-[0.22em] text-muted-foreground uppercase">
+                Financial Calculator
+              </span>
+              <div className="flex-1 h-px bg-border" />
+              <span className="font-mono text-xs tracking-[0.22em] text-primary uppercase">
+                FIRE Method
+              </span>
+            </div>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+              <h1 className="text-8xl md:text-[9rem] font-bold tracking-tighter leading-none text-foreground">
+                FIRE<span className="text-primary">.</span>
+              </h1>
+              <p className="text-base text-muted-foreground max-w-xs leading-relaxed md:text-right md:pb-3 hidden md:block">
+                Financial Independence, Retire Early —
+                <br />
+                <span className="text-foreground font-semibold">
+                  Chart your path to freedom.
+                </span>
+              </p>
+            </div>
           </div>
-
-          <p className="text-xl max-w-3xl mx-auto px-6 font-thin">
-            FIRE stands for Financial Independence, Retire Early. Our calculator
-            can help you create an investment and savings plan that may allow
-            you to retire years earlier than usual, joining the growing
-            community of people pursuing early retirement.
+          <p className="md:hidden text-base text-muted-foreground mt-4 leading-relaxed">
+            Financial Independence, Retire Early —{" "}
+            <span className="text-foreground font-semibold">
+              Chart your path to freedom.
+            </span>
           </p>
         </div>
 
-        <div className="flex justify-center gap-10 flex-wrap items-start w-full px-4 mb-10">
-          {/* 左侧 ：卡片 1 */}
+        {/* Input Cards */}
+        <div className="flex justify-center gap-8 flex-wrap items-start w-full px-4 md:px-6 mt-8 mb-8">
           <SituationCard
             inputs={inputs}
             handleInputChange={handleInputChange}
             fireModelsRef={refs.fireModelsRef}
             onScrollToModels={handlers.handleScrollToModels}
           />
-
-          {/* 右侧：卡片 2 */}
           <StrategyCard
             inputs={inputs}
             handleInputChange={handleInputChange}
@@ -53,15 +68,17 @@ function Home() {
           />
         </div>
 
-        {/* 中间：按钮 */}
-        <button
-          className="btn text-base-content  w-11/12 md:w-80 btn-outline btn-accent mb-10 text-lg "
-          onClick={handleAnalyze}
-        >
-          Analyze
-        </button>
+        {/* CTA */}
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-6 mb-14">
+          <button
+            className="w-full md:w-auto px-12 py-4 bg-primary text-primary-foreground font-bold text-sm tracking-[0.15em] uppercase hover:opacity-90 active:scale-[0.99] transition-all duration-200 cursor-pointer rounded-none"
+            onClick={handleAnalyze}
+          >
+            Analyze my FIRE path →
+          </button>
+        </div>
 
-        {/* 结果区 */}
+        {/* Results */}
         {result && (
           <ResultSection
             result={result}
