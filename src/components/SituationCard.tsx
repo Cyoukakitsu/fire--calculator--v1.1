@@ -17,205 +17,177 @@ function SituationCard({
   onScrollToModels,
 }: SituationCardProps) {
   return (
-    <div className="flex flex-col w-full max-w-162.5">
-      {/* --- 上半部分：Situation --- */}
-      <div className="bg-card text-card-foreground p-6 md:p-8 rounded-xl mt-10 w-full border border-border shadow-sm">
-        <p className="text-3xl md:text-4xl font-bold text-center mb-6">
-          Your Situation
-        </p>
-
-        {/* Current Age */}
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-4">
-          <label className="text-lg md:text-xl font-semibold w-full md:w-40 text-left md:text-right">
-            Current Age
-          </label>
-          <input
-            type="number"
-            name="currentAge"
-            min="0"
-            className="input input-bordered w-full md:w-80"
-            placeholder="25"
-            value={inputs.currentAge}
-            onChange={handleInputChange}
-            onWheel={(e) => (e.target as HTMLInputElement).blur()}
-          />
+    <div className="flex flex-col w-full max-w-[600px]">
+      {/* Section 01: Situation */}
+      <div className="group w-full border border-border border-l-4 border-l-primary bg-card transition-shadow duration-200 hover:shadow-sm">
+        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40 group-hover:bg-muted/70 transition-colors duration-150">
+          <span className="font-mono text-xs text-primary tracking-widest font-bold">01</span>
+          <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
+            Your Situation
+          </h2>
         </div>
 
-        {/* Target Age */}
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-4">
-          <label className="text-lg md:text-xl font-semibold w-full md:w-40 text-left md:text-right">
-            Simulation Age
-          </label>
-          <input
-            type="number"
-            name="targetAge"
-            min="0"
-            className="input input-bordered w-full md:w-80"
-            placeholder="50"
-            value={inputs.targetAge}
-            onChange={handleInputChange}
-            onWheel={(e) => (e.target as HTMLInputElement).blur()}
-          />
-        </div>
+        <div className="px-6 py-6 space-y-5">
+          {/* Current Age */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5">
+            <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0">
+              Current Age
+            </label>
+            <input
+              type="number"
+              name="currentAge"
+              min="0"
+              className="input input-bordered w-full sm:flex-1 text-sm"
+              placeholder="25"
+              value={inputs.currentAge}
+              onChange={handleInputChange}
+              onWheel={(e) => (e.target as HTMLInputElement).blur()}
+            />
+          </div>
 
-        {/* Current Savings */}
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-4">
-          <label className="text-lg md:text-xl font-semibold w-full md:w-40 text-left md:text-right">
-            Current Savings
-          </label>
-          <input
-            type="number"
-            name="currentSavings"
-            min="0"
-            className="input input-bordered w-full md:w-80"
-            placeholder="1,000,000"
-            value={inputs.currentSavings}
-            onChange={handleInputChange}
-            onWheel={(e) => (e.target as HTMLInputElement).blur()}
-          />
+          {/* Simulation Age */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5">
+            <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0">
+              Simulation Age
+            </label>
+            <input
+              type="number"
+              name="targetAge"
+              min="0"
+              className="input input-bordered w-full sm:flex-1 text-sm"
+              placeholder="50"
+              value={inputs.targetAge}
+              onChange={handleInputChange}
+              onWheel={(e) => (e.target as HTMLInputElement).blur()}
+            />
+          </div>
+
+          {/* Current Savings */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5">
+            <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0">
+              Current Savings
+            </label>
+            <div className="flex items-center w-full sm:flex-1">
+              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 text-sm text-muted-foreground font-mono shrink-0">
+                ¥
+              </span>
+              <input
+                type="number"
+                name="currentSavings"
+                min="0"
+                className="input input-bordered flex-1 border-l-0 text-sm"
+                placeholder="1,000,000"
+                value={inputs.currentSavings}
+                onChange={handleInputChange}
+                onWheel={(e) => (e.target as HTMLInputElement).blur()}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* --- 下半部分：Retirement --- */}
-      <div className="bg-card text-card-foreground p-6 md:p-8 pb-4 rounded-xl mt-10 w-full border border-border shadow-sm">
-        <p className="text-3xl md:text-4xl font-bold text-center mb-6">
-          Your retirement
-        </p>
-
-        {/* Target Spending */}
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-4">
-          <label className="text-lg md:text-xl font-semibold w-full md:w-64 text-left md:text-right">
-            Post-FIRE Annual Spending
-          </label>
-          <input
-            type="number"
-            name="annualSpending"
-            min="0"
-            className="input input-bordered w-full md:w-80"
-            value={inputs.annualSpending}
-            onChange={handleInputChange}
-            onWheel={(e) => (e.target as HTMLInputElement).blur()}
-          />
+      {/* Section 02: Retirement — attached below 01 */}
+      <div className="group w-full border border-border border-t-0 border-l-4 border-l-primary bg-card transition-shadow duration-200 hover:shadow-sm">
+        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40 group-hover:bg-muted/70 transition-colors duration-150">
+          <span className="font-mono text-xs text-primary tracking-widest font-bold">02</span>
+          <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
+            Your Retirement
+          </h2>
         </div>
 
-        {/* Annual Inflation */}
-        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 mb-2">
-          <label className="text-lg md:text-xl font-semibold w-full md:w-64 text-left md:text-right">
-            Annual Inflation ({inputs.inflationRate}%)
-          </label>
-          <input
-            type="range"
-            name="inflationRate"
-            min={0}
-            max="10"
-            className="range range-neutral w-full md:w-80"
-            value={inputs.inflationRate}
-            onChange={handleInputChange}
-            onWheel={(e) => (e.target as HTMLInputElement).blur()}
-          />
-        </div>
-
-        {/* Life Models */}
-        <fieldset className="fieldset w-full">
-          <div className="divider mt-10">
-            <p className="text-sm md:text-base font-light text-center text-muted-foreground">
-              I don&apos;t know how much I&apos;ll spend after FIRE
-            </p>
+        <div className="px-6 py-6 space-y-5">
+          {/* Target Spending */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-5">
+            <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0 leading-tight">
+              Post-FIRE Annual Spending
+            </label>
+            <div className="flex items-center w-full sm:flex-1">
+              <span className="px-3 h-10 flex items-center bg-muted border border-border border-r-0 text-sm text-muted-foreground font-mono shrink-0">
+                ¥
+              </span>
+              <input
+                type="number"
+                name="annualSpending"
+                min="0"
+                className="input input-bordered flex-1 border-l-0 text-sm"
+                value={inputs.annualSpending}
+                onChange={handleInputChange}
+                onWheel={(e) => (e.target as HTMLInputElement).blur()}
+              />
+            </div>
           </div>
 
-          <details
-            className="collapse bg-card border border-border"
-            ref={fireModelsRef as React.RefObject<HTMLDetailsElement>}
-          >
-            <summary
-              className="collapse-title font-bold btn h-auto py-3 flex items-center justify-center cursor-pointer"
-              onClick={onScrollToModels}
+          {/* Inflation Rate */}
+          <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5">
+            <label className="text-sm font-medium text-muted-foreground sm:w-44 sm:text-right shrink-0 sm:pt-1">
+              Annual Inflation
+            </label>
+            <div className="flex flex-col w-full sm:flex-1 gap-1">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-muted-foreground">0%</span>
+                <span className="font-mono text-sm font-bold text-primary">{inputs.inflationRate}%</span>
+                <span className="font-mono text-xs text-muted-foreground">10%</span>
+              </div>
+              <input
+                type="range"
+                name="inflationRate"
+                min={0}
+                max="10"
+                className="range range-primary w-full"
+                value={inputs.inflationRate}
+                onChange={handleInputChange}
+                onWheel={(e) => (e.target as HTMLInputElement).blur()}
+              />
+            </div>
+          </div>
+
+          {/* FIRE Models */}
+          <div className="pt-2">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex-1 h-px bg-border" />
+              <p className="text-xs text-muted-foreground font-mono whitespace-nowrap">
+                Not sure about spending?
+              </p>
+              <div className="flex-1 h-px bg-border" />
+            </div>
+
+            <details
+              className="border border-border"
+              ref={fireModelsRef as React.RefObject<HTMLDetailsElement>}
             >
-              5 FIRE models for you to choose from
-            </summary>
-
-            {/* Model 1 */}
-            <details className="collapse bg-card border border-border mt-2">
-              <summary className="collapse-title font-semibold text-lg cursor-pointer">
-                1. Lean FIRE
+              <summary
+                className="flex items-center justify-between px-4 py-3 font-semibold text-sm cursor-pointer select-none hover:bg-muted/50 transition-colors duration-150"
+                onClick={onScrollToModels}
+              >
+                <span>5 FIRE models for reference</span>
+                <svg className="w-4 h-4 text-muted-foreground shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
               </summary>
-              <div className="collapse-content">
-                <p className="font-light text-sm md:text-base mt-2 text-muted-foreground">
-                  A minimalist retirement achieved through extreme frugality and
-                  very low living expenses. <br />
-                  <span className="font-bold text-foreground">
-                    Approximate Annual Spending: ~1.5 - 2.5 Million JPY
-                  </span>
-                </p>
+
+              <div className="border-t border-border divide-y divide-border">
+                {[
+                  { num: "1", name: "Lean FIRE", desc: "Minimalist retirement through extreme frugality.", amount: "~¥1.5–2.5M / year" },
+                  { num: "2", name: "Fat FIRE", desc: "Luxurious, high-budget retirement with abundant spending.", amount: "¥10M+ / year" },
+                  { num: "3", name: "Regular FIRE", desc: "Standard comfortable middle-class retirement.", amount: "~¥4–6M / year" },
+                  { num: "4", name: "Barista FIRE", desc: "Semi-retirement with low-stress part-time income.", amount: "~¥3–5M / year" },
+                  { num: "5", name: "Coast FIRE", desc: "Enough saved early for compound interest to do the work.", amount: "¥4–8M+ / year" },
+                ].map((m) => (
+                  <div key={m.num} className="px-4 py-3">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono text-xs text-primary shrink-0">{m.num}.</span>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{m.name}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{m.desc}</p>
+                        <p className="text-xs font-mono font-bold text-primary mt-1">{m.amount}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </details>
-
-            {/* Model 2 */}
-            <details className="collapse bg-card border border-border mt-2">
-              <summary className="collapse-title font-semibold text-lg cursor-pointer">
-                2. Fat FIRE
-              </summary>
-              <div className="collapse-content">
-                <p className="font-light text-sm md:text-base mt-2 text-muted-foreground">
-                  A luxurious, high-budget retirement with abundant spending and
-                  lifestyle indulgences. <br />
-                  <span className="font-bold text-foreground">
-                    Approximate Annual Spending: 10 Million JPY+
-                  </span>
-                </p>
-              </div>
-            </details>
-
-            {/* Model 3 */}
-            <details className="collapse bg-card border border-border mt-2">
-              <summary className="collapse-title font-semibold text-lg cursor-pointer">
-                3. Traditional / Regular FIRE
-              </summary>
-              <div className="collapse-content">
-                <p className="font-light text-sm md:text-base mt-2 text-muted-foreground">
-                  The standard approach aiming for a comfortable, average
-                  middle-class retirement lifestyle. <br />
-                  <span className="font-bold text-foreground">
-                    Approximate Annual Spending: ~4 - 6 Million JPY
-                  </span>
-                </p>
-              </div>
-            </details>
-
-            {/* Model 4 */}
-            <details className="collapse bg-card border border-border mt-2">
-              <summary className="collapse-title font-semibold text-lg cursor-pointer">
-                4. Barista FIRE
-              </summary>
-              <div className="collapse-content">
-                <p className="font-light text-sm md:text-base mt-2 text-muted-foreground">
-                  Semi-retirement using low-stress part-time income to cover
-                  current expenses while letting investments grow. <br />
-                  <span className="font-bold text-foreground">
-                    Approximate Annual Spending: ~3 - 5 Million JPY
-                  </span>
-                </p>
-              </div>
-            </details>
-
-            {/* Model 5 */}
-            <details className="collapse bg-card border border-border mt-2">
-              <summary className="collapse-title font-semibold text-lg cursor-pointer">
-                5. Coast FIRE
-              </summary>
-              <div className="collapse-content">
-                <p className="font-light text-sm md:text-base mt-2 text-muted-foreground">
-                  Saving enough early for compound interest to cover future
-                  retirement, allowing you to stop saving now and spend your
-                  full income. <br />
-                  <span className="font-bold text-foreground">
-                    Approximate Annual Spending: 4 - 8 Million JPY+
-                  </span>
-                </p>
-              </div>
-            </details>
-          </details>
-        </fieldset>
+          </div>
+        </div>
       </div>
     </div>
   );

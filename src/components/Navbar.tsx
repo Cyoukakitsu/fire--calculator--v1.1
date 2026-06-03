@@ -21,20 +21,22 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar bg-card border-b border-border px-4">
+    <div className="navbar bg-card border-b-2 border-primary/25 px-6 h-14 min-h-14">
       <div className="navbar-start">
         <Link
           href="/"
-          className="text-xl font-bold flex items-center gap-2 cursor-pointer"
+          className="flex items-center gap-3 cursor-pointer"
         >
           <Image
             src="/icon.png"
             alt="FireFlow Logo"
-            width={32}
-            height={32}
-            className="w-8 h-8"
+            width={28}
+            height={28}
+            className="w-7 h-7"
           />
-          <span className="text-foreground">Fire calculator</span>
+          <span className="font-mono text-sm font-bold tracking-[0.08em] uppercase text-foreground">
+            Fire Calculator
+          </span>
         </Link>
       </div>
 
@@ -46,7 +48,7 @@ function Navbar() {
         >
           {isDark ? (
             <svg
-              className="h-7 w-7 fill-current text-blue-400"
+              className="h-5 w-5 fill-current text-primary"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -54,7 +56,7 @@ function Navbar() {
             </svg>
           ) : (
             <svg
-              className="h-7 w-7 fill-current text-yellow-500"
+              className="h-5 w-5 fill-current text-primary"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
