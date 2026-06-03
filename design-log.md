@@ -106,6 +106,45 @@
 | `ResultSection.tsx` | 细节 | `style={{ color: "var(--accent)" }}` 可替换为更稳健的Tailwind class，前提是accent color映射正确 | 验证或改用 `text-accent` |
 | 整体 | 影响体验 | 结果区缺少"距离FIRE还有X年"的时间指标，这是用户最关心的核心信息 | 在hero band中添加years-to-FIRE计算值 |
 
+---
+
+## Round 3
+
+### Generator Phase
+
+**针对 Round 2 问题修复 + 最终设计推进：**
+
+1. `src/app/globals.css` - 将 `@keyframes ticker-scroll` 移至CSS文件，添加 `.ticker-animate` 工具类，告别JSX内联style
+2. `src/app/page.tsx` - 移除 `<style>` 标签，使用 `.ticker-animate`；新增 FIRE Method Strip（3格分区式教育条：SAVE→INVEST→RETIRE）
+3. `src/components/FireChart.tsx` - 添加 MutationObserver 检测 dark mode，动态切换 `tooltipStyle` 对象（亮色/深色两套）
+4. `src/components/ResultSection.tsx` - 新增 `yearsToFire` 计算指标（FIRE Age - Current Age），在inverted hero band中作为核心展示数据
+
+**Generator 自评：**
+
+| Category | Score | Reason |
+|---|---|---|
+| Design Quality | 33/40 | 系统已完整：纹理+ticker+方法条+编辑卡片+翻转hero；各层次视觉有机协调；缺乏一个令人震撼的单一高光时刻 |
+| Originality | 26/30 | 所有反模式均已消除；Ticker+方法条+years-to-FIRE = 三个有意义的刻意选择；amber palette在fintech中罕见 |
+| Craft | 18/20 | tooltip已完全响应dark mode；@keyframes在CSS中；max-width统一；排版层级清晰 |
+| Functionality | 8/10 | yearsToFire是纯呈现计算，未触碰逻辑；build通过 |
+| **Total** | **85/100** | |
+
+**最不满意的点：** FIRE Method Strip目前是静态的三格文字，若能加一个细节装饰（如amber左边线与章节标题一致）会更统一
+
+### Evaluator Phase — Round 3
+
+| Category | Score | 具体理由 |
+|---|---|---|
+| Design Quality | 33/40 | 视觉系统完整且内聚：点阵背景→ticker信息条→编辑hero→方法条→numbered卡片→翻转hero结果；amber主色有情绪（FIRE=火=财富）；dark mode navy提供高质量对比；但尚无"令人惊叹"的单一视觉高光 |
+| Originality | 26/30 | Ticker信息条在同类工具中罕见；方法论3步条增添教育个性；amber+navy组合在fintech工具中不落俗套；Years-to-FIRE作为首要结果指标是刻意的UX决策；无一项命中AI味扣分项 |
+| Craft | 18/20 | Tooltip完全响应dark mode（MutationObserver方案可靠）；@keyframes位于CSS正确位置；max-width container统一；排版层级有mono标签+bold数字的清晰分级；左边线颜色编码系统coherent；扣分：FireMethod Strip边线可与卡片系统统一 |
+| Functionality | 8/10 | build通过，所有hooks连接正确，新增指标为纯计算无副作用 |
+| **Total** | **85/100** | ✅ 通过阈值，循环结束 |
+
+**残余细节（无需修复，仅记录）：**
+- FIRE Method Strip的三格可加amber left border与卡片01/02/03保持一致
+- chart tooltip在极深dark mode背景可再调暗0.05L
+
 ### Evaluator Phase — Round 1
 
 | Category | Score | 具体理由 |

@@ -196,4 +196,9 @@
   .ticker-animate {
     animation: ticker-scroll 30s linear infinite;
   }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-animate {
+      animation: none;
+    }
+  }
 }

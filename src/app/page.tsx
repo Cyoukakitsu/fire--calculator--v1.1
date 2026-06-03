@@ -83,7 +83,7 @@ function Home() {
 
         {/* FIRE Method Strip */}
         <div className="w-full max-w-7xl mx-auto px-6 mt-6">
-          <div className="flex flex-col sm:flex-row items-stretch border border-border bg-card">
+          <div className="flex flex-col sm:flex-row items-stretch border border-border border-t-2 border-t-primary bg-card">
             {METHOD_STEPS.map((s, i) => (
               <div
                 key={i}

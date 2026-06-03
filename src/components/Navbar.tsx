@@ -21,7 +21,7 @@ function Navbar() {
   };
 
   return (
-    <div className="navbar bg-card border-b-2 border-foreground/15 px-6 h-14 min-h-14">
+    <div className="navbar bg-card border-b-2 border-primary/25 px-6 h-14 min-h-14">
       <div className="navbar-start">
         <Link
           href="/"

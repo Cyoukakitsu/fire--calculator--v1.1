@@ -19,8 +19,8 @@ function SituationCard({
   return (
     <div className="flex flex-col w-full max-w-[600px]">
       {/* Section 01: Situation */}
-      <div className="w-full border border-border border-l-4 border-l-primary bg-card">
-        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
+      <div className="group w-full border border-border border-l-4 border-l-primary bg-card transition-shadow duration-200 hover:shadow-sm">
+        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40 group-hover:bg-muted/70 transition-colors duration-150">
           <span className="font-mono text-xs text-primary tracking-widest font-bold">01</span>
           <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
             Your Situation
@@ -87,8 +87,8 @@ function SituationCard({
       </div>
 
       {/* Section 02: Retirement — attached below 01 */}
-      <div className="w-full border border-border border-t-0 border-l-4 border-l-primary bg-card">
-        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
+      <div className="group w-full border border-border border-t-0 border-l-4 border-l-primary bg-card transition-shadow duration-200 hover:shadow-sm">
+        <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40 group-hover:bg-muted/70 transition-colors duration-150">
           <span className="font-mono text-xs text-primary tracking-widest font-bold">02</span>
           <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
             Your Retirement

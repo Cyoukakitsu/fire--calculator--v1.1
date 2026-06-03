@@ -19,6 +19,14 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
   const interestPct = 100 - principalPct;
   const yearsToFire = result.fireAge - inputs.currentAge;
 
+  const totalSpan = inputs.targetAge - inputs.currentAge;
+  const fireProgress =
+    totalSpan > 0
+      ? Math.min(96, Math.max(4, ((result.fireAge - inputs.currentAge) / totalSpan) * 100))
+      : 50;
+
+  const showFireLabel = fireProgress >= 8 && fireProgress <= 88;
+
   return (
     <div
       className="w-full pb-16"
@@ -80,8 +88,89 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
         </div>
       </div>
 
-      {/* Chart + Breakdown in normal container */}
+      {/* Chart + Breakdown + Timeline */}
       <div className="max-w-7xl mx-auto px-4 md:px-6">
+
+        {/* ── Freedom Timeline ── */}
+        <div className="border border-border border-l-4 border-l-primary bg-card mt-6">
+          <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
+            <span className="font-mono text-xs text-primary tracking-widest font-bold">◆</span>
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
+              Freedom Timeline
+            </h3>
+            <span className="ml-auto font-mono text-xs text-muted-foreground">
+              {yearsToFire} years to financial independence
+            </span>
+          </div>
+
+          <div className="px-8 py-7">
+            {/* Track */}
+            <div className="relative h-1 bg-muted mb-10">
+              {/* Amber fill: today → FIRE */}
+              <div
+                className="absolute inset-y-0 left-0 bg-primary transition-all duration-1000"
+                style={{ width: `${fireProgress}%` }}
+              />
+              {/* Muted fill: FIRE → end */}
+              <div
+                className="absolute inset-y-0 bg-muted-foreground/20 transition-all duration-1000"
+                style={{ left: `${fireProgress}%`, right: 0 }}
+              />
+
+              {/* Start marker */}
+              <div className="absolute -top-1.5 left-0 w-4 h-4 bg-muted-foreground" />
+
+              {/* FIRE diamond — rotated square */}
+              <div
+                className="absolute -top-2.5 w-6 h-6 bg-primary -translate-x-1/2 rotate-45 ring-2 ring-primary/30 transition-all duration-1000"
+                style={{ left: `${fireProgress}%` }}
+              />
+
+              {/* End marker */}
+              <div className="absolute -top-1.5 right-0 w-4 h-4 border-2 border-border bg-card" />
+            </div>
+
+            {/* Labels */}
+            <div className="relative h-9">
+              {/* Start */}
+              <div className="absolute left-0">
+                <p className="font-mono text-xs font-bold text-foreground">
+                  Age {inputs.currentAge}
+                </p>
+                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">
+                  Today
+                </p>
+              </div>
+
+              {/* FIRE label */}
+              {showFireLabel && (
+                <div
+                  className="absolute -translate-x-1/2 text-center transition-all duration-1000"
+                  style={{ left: `${fireProgress}%` }}
+                >
+                  <p className="font-mono text-xs font-bold text-primary whitespace-nowrap">
+                    Age {result.fireAge}
+                  </p>
+                  <p className="font-mono text-[10px] text-primary/60 uppercase tracking-wider">
+                    FIRE
+                  </p>
+                </div>
+              )}
+
+              {/* End */}
+              <div className="absolute right-0 text-right">
+                <p className="font-mono text-xs font-bold text-foreground">
+                  Age {inputs.targetAge}
+                </p>
+                <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-wider">
+                  Sim End
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Chart */}
         <FireChart data={result.chartData} targetAmount={result.targetNumber} />
 
         {/* Money Breakdown */}

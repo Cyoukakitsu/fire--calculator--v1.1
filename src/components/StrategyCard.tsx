@@ -18,8 +18,8 @@ function StrategyCard({
   onScrollToInvestors,
 }: StrategyCardProps) {
   return (
-    <div className="w-full max-w-[600px] border border-border border-l-4 border-l-secondary bg-card">
-      <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40">
+    <div className="group w-full max-w-[600px] border border-border border-l-4 border-l-secondary bg-card transition-shadow duration-200 hover:shadow-sm">
+      <div className="flex items-center gap-4 px-6 py-3 border-b border-border bg-muted/40 group-hover:bg-muted/70 transition-colors duration-150">
         <span className="font-mono text-xs text-secondary tracking-widest font-bold">03</span>
         <h2 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">
           Investing Strategy
