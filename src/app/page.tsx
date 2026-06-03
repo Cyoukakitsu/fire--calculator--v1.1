@@ -16,6 +16,12 @@ const TICKER_ITEMS = [
   "FIRE = FINANCIAL INDEPENDENCE, RETIRE EARLY",
 ];
 
+const METHOD_STEPS = [
+  { step: "01", action: "SAVE", desc: "Build your capital base systematically over time" },
+  { step: "02", action: "INVEST", desc: "Put capital to work across diversified asset classes" },
+  { step: "03", action: "RETIRE", desc: "Live on the 4% safe withdrawal rate from your portfolio" },
+];
+
 function Home() {
   const { inputs, handleInputChange, result, handleAnalyze } =
     useFireCalculator();
@@ -28,7 +34,7 @@ function Home() {
 
       {/* Financial ticker bar */}
       <div className="w-full border-b border-border bg-primary overflow-hidden py-2">
-        <div className="flex gap-12 animate-[scroll_30s_linear_infinite] whitespace-nowrap">
+        <div className="flex gap-12 ticker-animate whitespace-nowrap">
           {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
             <span
               key={i}
@@ -75,8 +81,28 @@ function Home() {
           </p>
         </div>
 
+        {/* FIRE Method Strip */}
+        <div className="w-full max-w-7xl mx-auto px-6 mt-6">
+          <div className="flex flex-col sm:flex-row items-stretch border border-border bg-card">
+            {METHOD_STEPS.map((s, i) => (
+              <div
+                key={i}
+                className={`flex-1 px-5 py-4 ${i < METHOD_STEPS.length - 1 ? "border-b sm:border-b-0 sm:border-r border-border" : ""}`}
+              >
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="font-mono text-xs text-muted-foreground">{s.step}</span>
+                  <span className="text-sm font-bold uppercase tracking-[0.14em] text-primary">
+                    {s.action}
+                  </span>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Input Cards */}
-        <div className="w-full max-w-7xl mx-auto px-4 md:px-6 mt-8 mb-8">
+        <div className="w-full max-w-7xl mx-auto px-4 md:px-6 mt-6 mb-8">
           <div className="flex justify-center gap-6 flex-wrap items-start">
             <SituationCard
               inputs={inputs}
@@ -113,13 +139,6 @@ function Home() {
           />
         )}
       </div>
-
-      <style>{`
-        @keyframes scroll {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `}</style>
     </>
   );
 }

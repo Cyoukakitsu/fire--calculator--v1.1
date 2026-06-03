@@ -17,6 +17,7 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
 
   const principalPct = (result.principal / result.finalAssets) * 100;
   const interestPct = 100 - principalPct;
+  const yearsToFire = result.fireAge - inputs.currentAge;
 
   return (
     <div
@@ -26,17 +27,18 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
       {/* Full-width inverted hero band */}
       <div className="w-full bg-foreground text-background mt-10 py-10 md:py-14">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="flex items-center gap-4 mb-6 opacity-40">
-            <span className="font-mono text-xs tracking-[0.22em] uppercase">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="font-mono text-xs tracking-[0.22em] uppercase opacity-40">
               Financial Projection
             </span>
-            <div className="flex-1 h-px bg-background opacity-30" />
-            <span className="font-mono text-xs tracking-[0.22em] uppercase">
+            <div className="flex-1 h-px bg-background opacity-20" />
+            <span className="font-mono text-xs tracking-[0.22em] uppercase opacity-40">
               Your FIRE Path
             </span>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-end gap-6 md:gap-16">
+            {/* FIRE Age hero */}
             <div>
               <p className="font-mono text-xs tracking-[0.2em] uppercase opacity-50 mb-1">
                 FIRE Age
@@ -46,12 +48,22 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
               </p>
             </div>
 
-            <div className="flex flex-row md:flex-col gap-8 md:gap-4 pb-2">
+            {/* Secondary metrics */}
+            <div className="flex flex-row md:flex-col gap-8 md:gap-5 pb-2">
+              <div>
+                <p className="font-mono text-xs tracking-[0.2em] uppercase opacity-50 mb-1">
+                  Years to FIRE
+                </p>
+                <p className="text-3xl font-bold text-accent">
+                  {yearsToFire}
+                  <span className="text-base font-normal opacity-60 ml-1">yrs</span>
+                </p>
+              </div>
               <div>
                 <p className="font-mono text-xs tracking-[0.2em] uppercase opacity-50 mb-1">
                   Inflation Used
                 </p>
-                <p className="text-3xl font-bold" style={{ color: "var(--accent)" }}>
+                <p className="text-xl font-bold opacity-80">
                   {inputs.inflationRate}%
                 </p>
               </div>
@@ -59,7 +71,7 @@ function ResultSection({ result, inputs, resultRef }: ResultSectionProps) {
                 <p className="font-mono text-xs tracking-[0.2em] uppercase opacity-50 mb-1">
                   Target Number
                 </p>
-                <p className="text-2xl font-bold" style={{ color: "var(--primary)" }}>
+                <p className="text-xl font-bold text-primary">
                   {formatMoney(result.targetNumber)}
                 </p>
               </div>

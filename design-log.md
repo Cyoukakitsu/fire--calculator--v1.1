@@ -60,6 +60,52 @@
 
 **最不满意的点：** 两个输入卡在极窄屏幕(375px)上标签和输入框的对齐可能出问题，需要进一步测试
 
+---
+
+## Round 2
+
+### Generator Phase
+
+**针对 Round 1 问题修复 + 设计推进：**
+
+1. `src/app/globals.css` - 添加 `--dot-pattern` CSS变量，实现暗/亮模式自适应点阵背景纹理，radius降至0.25rem
+2. `src/app/page.tsx` - 新增金融ticker信息条（amber背景，白色mono字体，滚动动画），统一所有区块用`max-w-7xl`容器
+3. `src/components/SituationCard.tsx` - 添加 `border-l-4 border-l-primary` 琥珀左边框，移除shadow-sm防止接缝叠影
+4. `src/components/StrategyCard.tsx` - 添加 `border-l-4 border-l-secondary` 绿色左边框，资产类型间加分割线
+5. `src/components/ResultSection.tsx` - 全宽翻转色(bg-foreground text-background) hero band展示FIRE Age
+6. `src/components/FireChart.tsx` - Tooltip改用hex border (#D4C5B0)，纯hex颜色常量，统一chart美学
+
+**Generator 自评：**
+
+| Category | Score | Reason |
+|---|---|---|
+| Design Quality | 32/40 | 点阵纹理+ticker条+翻转hero带=三层视觉层次；色彩系统一致；仍缺乏令人惊叹的"wow"时刻 |
+| Originality | 25/30 | Ticker信息条在FIRE工具中罕见；翻转hero是刻意的戏剧性选择；整体风格有辨识度 |
+| Craft | 17/20 | Tooltip用hex，shadow叠加已修复，max-width统一；Tooltip仍为亮模式硬编码，深色模式会突兀 |
+| Functionality | 8/10 | 未破坏流程 |
+| **Total** | **82/100** | |
+
+**最不满意的点：** 图表Tooltip背景色硬编码为亮色(#FEFCF8)，深色模式下白色tooltip与深海军蓝背景产生视觉脱节
+
+### Evaluator Phase — Round 2
+
+| Category | Score | 具体理由 |
+|---|---|---|
+| Design Quality | 32/40 | 点阵背景为页面增加了纹理层次感；ticker bar是金融工具合理的信息密度选择；翻转hero产生强对比；但整体仍是"精良执行"而非"令人意外"的设计 |
+| Originality | 25/30 | Ticker bar在同类工具中罕见，amber+navy+点阵系统具有内聚感；扣分：表单输入区仍属标准形式，无惊喜 |
+| Craft | 17/20 | Tooltip border改用hex有效修复；色彩编码卡片边框系统清晰；扣分：Tooltip背景在dark mode为白色，会破坏沉浸感 |
+| Functionality | 8/10 | build通过，无报错 |
+| **Total** | **82/100** | 进入Round 3 |
+
+**必须修复问题：**
+
+| 位置 | 严重程度 | 问题 | 修复建议 |
+|---|---|---|---|
+| `FireChart.tsx` Tooltip | 影响体验 | background: "#FEFCF8" 在深色模式下白色tooltip与深海军蓝背景冲突 | 用CSS var检测或添加dark-aware style对象 |
+| `page.tsx` `<style>` | 细节 | `@keyframes scroll` 定义在JSX `<style>`标签中，不符合最佳实践 | 移至 globals.css |
+| `ResultSection.tsx` | 细节 | `style={{ color: "var(--accent)" }}` 可替换为更稳健的Tailwind class，前提是accent color映射正确 | 验证或改用 `text-accent` |
+| 整体 | 影响体验 | 结果区缺少"距离FIRE还有X年"的时间指标，这是用户最关心的核心信息 | 在hero band中添加years-to-FIRE计算值 |
+
 ### Evaluator Phase — Round 1
 
 | Category | Score | 具体理由 |

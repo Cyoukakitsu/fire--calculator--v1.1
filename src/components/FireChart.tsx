@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AreaChart,
   Area,
@@ -23,6 +23,20 @@ const AMBER = "#d97706";
 const TEAL = "#0891b2";
 
 const FireChart = ({ data, targetAmount }: FireChartProps) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const update = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
   if (!data || data.length === 0)
     return (
       <div className="p-10 text-center text-muted-foreground font-mono text-sm">
@@ -44,6 +58,26 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
     if (value >= 1000) return `¥${(value / 1000).toFixed(0)}k`;
     return `¥${value}`;
   };
+
+  const tooltipStyle = isDark
+    ? {
+        borderRadius: "2px",
+        border: "1px solid #3A3A4A",
+        boxShadow: "0 4px 12px -2px rgba(0,0,0,0.5)",
+        fontFamily: "Space Mono, monospace",
+        fontSize: "11px",
+        background: "#1E1E30",
+        color: "#EFE9DF",
+      }
+    : {
+        borderRadius: "2px",
+        border: "1px solid #D4C5B0",
+        boxShadow: "0 4px 12px -2px rgba(0,0,0,0.12)",
+        fontFamily: "Space Mono, monospace",
+        fontSize: "11px",
+        background: "#FEFCF8",
+        color: "#1C1917",
+      };
 
   return (
     <div className="w-full border border-border mt-6 bg-card">
@@ -103,15 +137,7 @@ const FireChart = ({ data, targetAmount }: FireChartProps) => {
             />
 
             <Tooltip
-              contentStyle={{
-                borderRadius: "2px",
-                border: "1px solid #D4C5B0",
-                boxShadow: "0 4px 12px -2px rgba(0,0,0,0.15)",
-                fontFamily: "Space Mono, monospace",
-                fontSize: "11px",
-                background: "#FEFCF8",
-                color: "#1C1917",
-              }}
+              contentStyle={tooltipStyle}
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               formatter={(value: any, name: any) => {
                 const numValue = Number(value);
